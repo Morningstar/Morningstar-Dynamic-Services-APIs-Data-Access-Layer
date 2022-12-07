@@ -119,3 +119,4 @@ So that we can confidently use semantic versioning, commit messages must follow 
     *    chore: Clean up with no change to functionality
 *   `Update config file` - use this message when updating a top-level file, e.g. .gitignore or .eslintignore
 *   `Update readme` - use this message when updating the top-level README.md
+*
