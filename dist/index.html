@@ -252,11 +252,13 @@
                 case 'xray.getPerformanceGraphUsData':
                 case 'xray.getStockStatsUsData':
                 case 'portfolioAnalysis.getHypotheticalPerformance':
+                case 'portfolioAnalysis.getRiskScore':
                     sampleParam = JSON.stringify(sampleUsPortfolio, null, 2);
                     break;
-                case 'portfolioAnalysis.getEsgPerformance':
+                case 'portfolioAnalysis.getSustainabilityData':
+                case 'portfolioAnalysis.getProductInvolvementData':
+                case 'portfolioAnalysis.getEsgRiskData':
                 case 'portfolioAnalysis.getEsgPerformanceIntlData':
-                case 'portfolioAnalysis.getRiskScore':
                 case 'portfolioAnalysis.getRegulatoryData':
                     sampleParam = JSON.stringify(sampleTestPortfolio, null, 2);
                     break;
@@ -264,6 +266,8 @@
                     sampleParam = JSON.stringify(sampleCostCalculationPortfolio, null, 2);
                     break;
                 case 'portfolioAnalysis.getIdrPdf': sampleParam = 'FOUSA05H5F';
+                    break;
+                case 'common.getJobStatus': sampleParam = JSON.stringify({ jobId: '1fe3c58f-7abf-4d50-8ca4-62dd6315d1dc' }, null, 2);
                     break;
                 case 'securityDetails.getSecurity': sampleParam = 'F0GBR050DD';
                     break;
@@ -284,6 +288,7 @@
             let methodName = getRefs('method-name').value;
             var primaryParam = getRefs('primary-param').value;
             switch(methodName) {
+                case 'common.getJobStatus':
                 case 'xray.getAssetAllocationBreakdown':
                 case 'xray.getAssetAllocationUsData':
                 case 'xray.getFeesExpensesData':
@@ -308,7 +313,9 @@
                 case 'xray.getStockStatsUsData':
                 case 'xray.getXrayIntlData':
                 case 'costCalculator.getCostCalculation':
-                case 'portfolioAnalysis.getEsgPerformance':
+                case 'portfolioAnalysis.getSustainabilityData':
+                case 'portfolioAnalysis.getProductInvolvementData':
+                case 'portfolioAnalysis.getEsgRiskData':
                 case 'portfolioAnalysis.getEsgPerformanceIntlData':
                 case 'portfolioAnalysis.getHypotheticalPerformance':
                 case 'portfolioAnalysis.getRiskScore':
@@ -365,6 +372,7 @@
             <div>
                 <label for="initializer">Call method:</label>
                 <select name="methodName" id="method-name">
+                    <option value="common.getJobStatus">getJobStatus</option>
                     <option value="xray.getAssetAllocationBreakdown">getAssetAllocationBreakdown</option>
                     <option value="xray.getAssetAllocationUsData">getAssetAllocationUsData</option>
                     <option value="xray.getFeesExpensesData">getFeesExpensesData</option>
@@ -395,7 +403,9 @@
                     <option value="screener.getIntlScreenerData">getIntlScreenerData</option>
                     <option value="timeSeries.getIntlTimeseriesData">getIntlTimeseriesData</option>
                     <option value="portfolioAnalysis.getRiskScore">getRiskScore</option>
-                    <option value="portfolioAnalysis.getEsgPerformance">getEsgPerformance</option>
+                    <option value="portfolioAnalysis.getSustainabilityData">getSustainabilityData</option>
+                    <option value="portfolioAnalysis.getProductInvolvementData">getProductInvolvementData</option>
+                    <option value="portfolioAnalysis.getEsgRiskData">getEsgRiskData</option>
                     <option value="portfolioAnalysis.getEsgPerformanceIntlData">getEsgPerformanceIntlData</option>
                     <option value="portfolioAnalysis.getHypotheticalPerformance">getHypotheticalPerformance</option>
                     <option value="portfolioAnalysis.getIdrPdf">getIdrPdf</option>

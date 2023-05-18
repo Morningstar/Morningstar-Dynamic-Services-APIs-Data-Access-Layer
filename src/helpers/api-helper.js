@@ -1,5 +1,4 @@
 import dataSources from '../helpers/apis.json';
-import hostNames from './host-names.json';
 
 /**
  * Check we have the required parameters
@@ -37,23 +36,8 @@ function getUrlTemplate(dataSourceId, sourceApi = 'intl') {
     return dataSources[dataSourceId][sourceApi].url;
 }
 
-/**
- * Generate dynamic hostname based on the sourceApi and environment parameters
- * @param {string} environment
- * @param {string} sourceApi
- */
-function getHostName(environment, sourceApi='intl') {
-    environment = (environment || 'prod').toLowerCase();
-    let hostName;
-    if (hostNames[sourceApi]) {
-        hostName = hostNames[sourceApi][environment];
-    }
-    return hostName;
-}
-
 export {
     checkParams,
-    getHostName,
     getUrlTemplate,
     replaceParams,
 };

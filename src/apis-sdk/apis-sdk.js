@@ -1,5 +1,6 @@
 import BaseClass from "./base-class";
 import DataAccess from '../data-access/data-access';
+import CommonApi from "./common-api";
 import CostCalculatorApi from "./cost-calculator-api";
 import PortfolioAnalysisApi from "./portfolio-analysis-api";
 import SecurityDetailsApi from "./security-details-api";
@@ -9,17 +10,15 @@ import ScreenerApi from "./screener-api";
 import XrayApi from './xray-api';
 import { merge } from '../helpers/utils';
 
-function getPrivateMethods({ _currencyId, _languageId, _environment, apiHelpers, dataAccess }) {
+function getPrivateMethods({ _currencyId, _languageId, apiHelpers, dataAccess }) {
     const methods = {
-        initializeSdk({ apiTokenExpiredCallback, currencyId, environment, languageId, token }) {
+        initializeSdk({ apiTokenExpiredCallback, currencyId, languageId, token }) {
             _currencyId = currencyId || _currencyId;
             _languageId = languageId || _languageId;
-            _environment = environment || _environment;
             dataAccess.initialize({ apiTokenExpiredCallback, token });
             methods.setEnvironment({
                 languageId: _languageId,
                 currencyId: _currencyId,
-                environment: _environment,
             });
         },
         setEnvironment(envParams) {
@@ -28,7 +27,6 @@ function getPrivateMethods({ _currencyId, _languageId, _environment, apiHelpers,
                     apiHelpers[key].changeEnvironment(merge({
                         languageId: _languageId,
                         currencyId: _currencyId,
-                        environment: _environment,
                     }, envParams));
                 }
             })
@@ -41,12 +39,12 @@ export default class ApisSdk {
     constructor() {
         // Private properties
         let _currencyId = 'GBP';
-        let _environment = 'prod';
         let _languageId = 'en-GB';
 
         const dataAccess = new DataAccess();
 
         const apiHelpers = {
+            common: new CommonApi(dataAccess),
             costCalculator: new CostCalculatorApi(dataAccess),
             investmentCompare: new InvestmentCompareApi(dataAccess),
             portfolioAnalysis: new PortfolioAnalysisApi(dataAccess),
@@ -58,7 +56,6 @@ export default class ApisSdk {
 
         const privateMethods = getPrivateMethods({
             _currencyId,
-            _environment,
             _languageId,
             apiHelpers,
             dataAccess,
@@ -98,6 +95,10 @@ export default class ApisSdk {
                 value: envParams => {
                     return privateMethods.setEnvironment.call(this, envParams);
                 },
+                writable: false,
+            },
+            common: {
+                value: apiHelpers.common,
                 writable: false,
             },
             costCalculator: {
