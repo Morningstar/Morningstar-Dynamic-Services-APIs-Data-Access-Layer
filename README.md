@@ -1,15 +1,15 @@
 Morningstar APIs are available to clients with MaaS based authentication that uses short expiry tokens so as to ensure that premium, real-time data is not accessible by users not entitled to view it. While registering and generating a token is not a difficult task that all our existing clients are already used to, some additional tasks (like sending the token in each API request, handling scenarios where the initially generated token expired during a user session) might not seem simple to clients to implement themselves. These tasks are handled seamlessly in our products and internal frameworks.
 
-The Morningstar APIs SDK aims to provide the same efficient, seamless way of handling tokens and token expiration while wrapping our APIs in simple functional methods that the clients can call to fetch the data they need. The usage would be as simple as including a JS file on the HTML page and then calling exposed methods like initialize and searchSecurities. See usage examples below.
+The Morningstar Data Access Library aims to provide the same efficient, seamless way of handling tokens and token expiration while wrapping our APIs in simple functional methods that the clients can call to fetch the data they need. The usage would be as simple as including a JS file on the HTML page and then calling exposed methods like initialize and searchSecurities. See usage examples below.
 
 # Usage
 
- 1. Include the SDK javascript file in your HTML page.  
+ 1. Include the Library javascript file in your HTML page.  
 The project builds into a simple JavaScript file that can be included in your application or HTML page.
 ```HTML
 <script src="mstar-apis-sdk.js" />
 ```
- 2. Initialize the SDK  
+ 2. Initialize the Library  
 Parameters common to all API calls like language ID, currency ID, MaaS based authentication token and an API token expiry callback function (used to set a new token when one expires) can be set in a single one time call to avoid repetition using the initialize method of the SDK.
 ```javascript
 window.mstarApisSdk.initialize({
