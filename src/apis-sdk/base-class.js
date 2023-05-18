@@ -1,5 +1,5 @@
 import { merge } from "../helpers/utils";
-import { getHostName, getUrlTemplate, replaceParams } from "../helpers/api-helper";
+import { getUrlTemplate, replaceParams } from "../helpers/api-helper";
 
 export default class BaseClass {
     constructor(apiNamespace, dataAccess) {
@@ -24,7 +24,6 @@ export default class BaseClass {
     getApiUrl(dataSourceId, sourceApi, paramValues, defaultValues = {}) {
         let parameterizedUrl = getUrlTemplate(dataSourceId, sourceApi)
         let apiParams = this.getApiParams(paramValues, defaultValues);
-        apiParams.hostName = getHostName(apiParams.environment, sourceApi);
 
         switch (typeof(apiParams)) {
             case 'object':

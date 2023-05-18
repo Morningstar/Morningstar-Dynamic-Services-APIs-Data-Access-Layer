@@ -87,11 +87,11 @@ npm run build
 
 ## Local browser preview and testing
 
-One can use `nodemon` to start a simple local server and host the `index.html` page added in `dist` folder
+The `preview` script uses `http-server' to start a local web server for hosting the `index.html` file located inside `./dist` folder.
 ```
 npm run preview
 ```
-Once the express server is up. Open https://localhost:3000/index.html in a web browser on your machine.\
+Once started, open any of the links displayed in the terminal using a web browser on your machine.\
 In the browser's developer tools, open console and use the publicly exposed methods —
 ```
 window.mstarApisSdk.initialize({
@@ -119,4 +119,3 @@ So that we can confidently use semantic versioning, commit messages must follow 
     *    chore: Clean up with no change to functionality
 *   `Update config file` - use this message when updating a top-level file, e.g. .gitignore or .eslintignore
 *   `Update readme` - use this message when updating the top-level README.md
-*

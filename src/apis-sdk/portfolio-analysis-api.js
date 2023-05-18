@@ -1,4 +1,5 @@
 import BaseClass from './base-class';
+import {merge} from "../helpers/utils";
 
 export default class PortfolioAnalysisApi extends BaseClass {
     constructor(dataAccess) {
@@ -6,7 +7,7 @@ export default class PortfolioAnalysisApi extends BaseClass {
     }
 
     getRiskScore(parameters) {
-        const apiParams = this.getApiParams(parameters, { apiEndPoint: 'riskScore' });
+        const apiParams = this.getApiParams(parameters, { apiEndPoint: 'risk-score' });
         const url = this.getApiUrl(this._apiNamespace, 'na', apiParams);
         const body = JSON.stringify({ portfolios: apiParams.portfolios });
         return this.getApiResponse({
@@ -20,15 +21,54 @@ export default class PortfolioAnalysisApi extends BaseClass {
         });
     }
 
-    getEsgPerformance(parameters) {
-        const apiParams = this.getApiParams(parameters, { apiEndPoint: 'esg' });
+    getSustainabilityData(parameters) {
+        const headers = merge(
+            {},
+            { 'content-type': 'application/json' },
+            parameters.headers
+        );
+        const apiParams = this.getApiParams(parameters, { apiEndPoint: 'sustainability' });
         const url = this.getApiUrl(this._apiNamespace, 'na', apiParams);
         const body = JSON.stringify({ portfolios: apiParams.portfolios });
         return this.getApiResponse({
             body,
-            headers: {
-                'content-type': 'application/json',
-            },
+            headers,
+            method: 'POST',
+            responseType: 'application/json',
+            url,
+        });
+    }
+
+    getProductInvolvementData(parameters) {
+        const headers = merge(
+            {},
+            { 'content-type': 'application/json' },
+            parameters.headers
+        );
+        const apiParams = this.getApiParams(parameters, { apiEndPoint: 'product-involvement' });
+        const url = this.getApiUrl('sustainability', 'na', apiParams);
+        const body = JSON.stringify({ portfolios: apiParams.portfolios });
+        return this.getApiResponse({
+            body,
+            headers,
+            method: 'POST',
+            responseType: 'application/json',
+            url,
+        });
+    }
+
+    getEsgRiskData(parameters) {
+        const headers = merge(
+            {},
+            { 'content-type': 'application/json' },
+            parameters.headers
+        );
+        const apiParams = this.getApiParams(parameters, { apiEndPoint: 'esg-risk' });
+        const url = this.getApiUrl('sustainability', 'na', apiParams);
+        const body = JSON.stringify({ portfolios: apiParams.portfolios });
+        return this.getApiResponse({
+            body,
+            headers,
             method: 'POST',
             responseType: 'application/json',
             url,
